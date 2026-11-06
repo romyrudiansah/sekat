@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="id" data-lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sekat: manajer partisi untuk Windows</title>
+<meta name="description" content="Sekat adalah manajer partisi gratis untuk Windows 10 dan 11: buat, ubah ukuran, pindahkan, salin, dan konversi partisi, dengan antrian yang hasilnya terlihat sebelum dijalankan.">
+<meta name="theme-color" content="#0f766e">
+<meta property="og:title" content="Sekat: manajer partisi untuk Windows">
+<meta property="og:description" content="Buat, ubah ukuran, pindahkan, salin, dan konversi partisi. Hasilnya terlihat di peta disk sebelum dijalankan.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://romyrudiansah.github.io/sekat-web/img/logo.png">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="icon" href="img/logo.png" type="image/png" sizes="256x256">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Bahasa dan tema dipasang sebelum halaman digambar supaya tidak berkedip.
+  (function () {
+    var d = document.documentElement, q = new URLSearchParams(location.search), lang, theme;
+    try { lang = localStorage.getItem('sekat-lang'); theme = localStorage.getItem('sekat-theme'); } catch (e) {}
+    lang = q.get('lang') || lang || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+    if (lang !== 'id' && lang !== 'en') lang = 'en';
+    d.setAttribute('data-lang', lang); d.lang = lang;
+    if (theme === 'light' || theme === 'dark') d.setAttribute('data-theme', theme);
+  })();
+</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#isi"><span lang="id">Langsung ke isi</span><span lang="en">Skip to content</span></a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#">
+      <img src="img/logo.svg" width="32" height="32" alt="">
+      <span>Sekat</span>
+    </a>
+    <nav class="nav-links" aria-label="Menu">
+      <a href="#fitur"><span lang="id">Fitur</span><span lang="en">Features</span></a>
+      <a href="#recovery">Recovery</a>
+      <a href="#keamanan"><span lang="id">Keamanan</span><span lang="en">Safety</span></a>
+      <a href="#cli">CLI</a>
+      <a href="#tanya"><span lang="id">Tanya jawab</span><span lang="en">FAQ</span></a>
+    </nav>
+    <div class="nav-tools">
+      <button class="tool" type="button" data-set-lang title="Ganti bahasa / Switch language">
+        <span lang="id">EN</span><span lang="en">ID</span>
+      </button>
+      <button class="tool" type="button" data-toggle-theme aria-label="Tema terang/gelap · Light/dark theme" title="Tema terang/gelap · Light/dark theme">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+      </button>
+      <a class="btn btn-small" href="#unduh"><span lang="id">Unduh</span><span lang="en">Download</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="isi">
+  <section class="hero">
+    <div class="wrap">
+      <a class="badge" href="#recovery">
+        <span class="badge-dot"></span>
+        <span lang="id">Baru di 1.1: perbesar C: yang terhalang partisi Recovery</span>
+        <span lang="en">New in 1.1: extend C: when the Recovery partition is in the way</span>
+      </a>
+      <h1>
+        <span lang="id">Atur partisi Windows.<br>Lihat hasilnya dulu.</span>
+        <span lang="en">Manage Windows partitions.<br>See the result first.</span>
+      </h1>
+      <p class="lead">
+        <span lang="id">Sekat adalah manajer partisi gratis untuk Windows 10 dan 11. Buat, ubah ukuran, pindahkan, salin, dan konversi partisi. Setiap perubahan masuk antrian dan langsung terlihat di peta disk, dan baru dijalankan saat Anda menekan Terapkan.</span>
+        <span lang="en">Sekat is a free partition manager for Windows 10 and 11. Create, resize, move, copy, and convert partitions. Every change goes into a queue and shows up on the disk map right away, and nothing runs until you press Apply.</span>
+      </p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/romyrudiansah/sekat-web/releases/download/v1.1.0/Sekat-Setup-1.1.0.exe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 19.5h15"/></svg>
+          <span lang="id">Unduh Sekat 1.1.0</span><span lang="en">Download Sekat 1.1.0</span>
+        </a>
+        <a class="btn btn-ghost" href="#fitur"><span lang="id">Lihat fitur</span><span lang="en">See features</span></a>
+      </div>
+      <p class="meta">
+        <span lang="id">Windows 10/11 · 64-bit · 6,7 MB · Gratis</span>
+        <span lang="en">Windows 10/11 · 64-bit · 6.7 MB · Free</span>
+      </p>
+      <figure class="window hero-shot">
+        <div class="shot" data-scene="main">
+          <img lang="id" class="t-light" src="img/shots/id-light-main.png" width="1196" height="819" loading="lazy" alt="Jendela Sekat: peta disk dengan partisi PROYEK yang dipindah ke kiri lalu diperbesar, ditandai kuning, dan antrian berisi dua langkah">
+          <img lang="id" class="t-dark" src="img/shots/id-dark-main.png" width="1196" height="819" loading="lazy" alt="Jendela Sekat: peta disk dengan partisi PROYEK yang dipindah ke kiri lalu diperbesar, ditandai kuning, dan antrian berisi dua langkah">
+          <img lang="en" class="t-light" src="img/shots/en-light-main.png" width="1196" height="819" loading="lazy" alt="The Sekat window: a disk map where the PROYEK partition is moved left and then extended, marked in yellow, with two steps in the queue">
+          <img lang="en" class="t-dark" src="img/shots/en-dark-main.png" width="1196" height="819" loading="lazy" alt="The Sekat window: a disk map where the PROYEK partition is moved left and then extended, marked in yellow, with two steps in the queue">
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="steps">
+    <div class="wrap">
+      <h2 class="eyebrow"><span lang="id">Cara kerjanya</span><span lang="en">How it works</span></h2>
+      <ol class="step-list">
+        <li>
+          <span class="step-no">1</span>
+          <h3><span lang="id">Pilih partisi</span><span lang="en">Pick a partition</span></h3>
+          <p><span lang="id">Peta disk menampilkan semua disk, partisi, dan ruang kosong. Klik sebuah blok, atau klik kanan untuk melihat operasinya.</span><span lang="en">The disk map shows every disk, partition, and free area. Click a block, or right-click it to see its operations.</span></p>
+        </li>
+        <li>
+          <span class="step-no">2</span>
+          <h3><span lang="id">Susun antrian</span><span lang="en">Build a queue</span></h3>
+          <p><span lang="id">Setiap operasi disimulasikan dulu. Blok yang akan berubah ditandai kuning, jadi hasilnya terlihat sebelum disk disentuh.</span><span lang="en">Each operation is simulated first. Blocks that will change are marked yellow, so you see the result before the disk is touched.</span></p>
+        </li>
+        <li>
+          <span class="step-no">3</span>
+          <h3><span lang="id">Terapkan</span><span lang="en">Apply</span></h3>
+          <p><span lang="id">Sekat mencadangkan tabel partisi, lalu memindai ulang disk dan mencocokkannya dengan rencana sebelum setiap langkah.</span><span lang="en">Sekat backs up the partition table, then rescans the disk and checks it against the plan before every step.</span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="fitur" class="features">
+    <div class="wrap">
+      <h2><span lang="id">Semua yang biasa Anda butuhkan dari manajer partisi</span><span lang="en">Everything you expect from a partition manager</span></h2>
+      <div class="grid">
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M9 6v12M15 6v12"/></svg>
+          <h3><span lang="id">Peta disk lengkap</span><span lang="en">A complete disk map</span></h3>
+          <p><span lang="id">Tabel MBR dan GPT, volume, huruf drive, pemakaian, ruang kosong, dan peringatan perataan 4K.</span><span lang="en">MBR and GPT tables, volumes, drive letters, usage, free space, and 4K alignment warnings.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a4.5 4.5 0 0 0-5.6 5.6L3.5 15.5v5h5l5.4-5.4a4.5 4.5 0 0 0 5.6-5.6l-2.9 2.9-2.6-.4-.4-2.6 2.9-2.9Z"/></svg>
+          <h3><span lang="id">Operasi sehari-hari</span><span lang="en">Everyday operations</span></h3>
+          <p><span lang="id">Inisialisasi disk, buat, hapus, format NTFS/exFAT/FAT32, perkecil, perbesar, serta ganti huruf drive dan label.</span><span lang="en">Initialize disks; create, delete, and format NTFS/exFAT/FAT32 partitions; shrink, extend, and change letters and labels.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 7.5 5 12l4.5 4.5M5 12h9.5M14.5 7.5H19v9h-4.5"/></svg>
+          <h3><span lang="id">Pindah dan perbesar ke kiri</span><span lang="en">Move and extend left</span></h3>
+          <p><span lang="id">Geser partisi ke ruang kosong di sebelahnya, lalu perbesar ke arah mana pun, dalam satu antrian.</span><span lang="en">Slide a partition into the free space next to it, then extend it in either direction, in one queue.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7.5h10M17 7.5l-3-3M17 7.5l-3 3M17 16.5H7M7 16.5l3-3M7 16.5l3 3"/></svg>
+          <h3><span lang="id">Salin dan konversi</span><span lang="en">Copy and convert</span></h3>
+          <p><span lang="id">Salin partisi ke disk lain, dan ubah tabel MBR ↔ GPT tanpa menghapus data.</span><span lang="en">Copy a partition to another disk, and convert MBR ↔ GPT without deleting data.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="12" height="9" rx="2"/><rect x="8.5" y="11" width="12" height="9" rx="2"/></svg>
+          <h3><span lang="id">Clone dan image</span><span lang="en">Clone and image</span></h3>
+          <p><span lang="id">Clone seluruh disk ke disk yang lebih besar, atau simpan disk sebagai file VHDX.</span><span lang="en">Clone a whole disk to a larger one, or save a disk as a VHDX file.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5M4 4v4.5h4.5M12 8v4.5l3 2"/></svg>
+          <h3><span lang="id">Cadangan tabel partisi</span><span lang="en">Partition table backups</span></h3>
+          <p><span lang="id">Tabel partisi dicadangkan otomatis sebelum antrian dijalankan dan bisa dipulihkan dari menu disk.</span><span lang="en">The partition table is backed up automatically before a queue runs, and can be restored from the disk menu.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5.5 13.5H12L11 21l7.5-10.5H12L13 3Z"/></svg>
+          <h3><span lang="id">Tahan listrik padam</span><span lang="en">Survives power loss</span></h3>
+          <p><span lang="id">Pemindahan partisi dicatat per potongan, jadi bisa dilanjutkan tepat dari potongan terakhir.</span><span lang="en">Partition moves are journaled chunk by chunk, so they resume exactly where they stopped.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5M12.5 15h4.5"/></svg>
+          <h3><span lang="id">GUI dan CLI</span><span lang="en">GUI and CLI</span></h3>
+          <p><span lang="id">Semua operasi juga ada di perintah <code>sekat</code>, termasuk antrian dari file teks.</span><span lang="en">Every operation is also in the <code>sekat</code> command, including queues from a text file.</span></p>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5S9.7 5.9 12 3.5Z"/></svg>
+          <h3><span lang="id">Dua bahasa, dua tema</span><span lang="en">Two languages, two themes</span></h3>
+          <p><span lang="id">Bahasa Indonesia dan Inggris, tema terang dan gelap, mengikuti pengaturan Windows.</span><span lang="en">Indonesian and English, light and dark themes, following your Windows settings.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="recovery" class="spotlight">
+    <div class="wrap spot-inner">
+      <div class="spot-text">
+        <p class="eyebrow"><span lang="id">Baru di versi 1.1</span><span lang="en">New in version 1.1</span></p>
+        <h2><span lang="id">C: penuh, tapi partisi Recovery menghalangi?</span><span lang="en">C: is full, but the Recovery partition is in the way?</span></h2>
+        <p><span lang="id">Di banyak laptop, partisi Recovery terletak tepat setelah C:. Akibatnya Disk Management tidak bisa memperbesar C: walau ada ruang kosong di belakangnya. Sekat memindahkan partisi Recovery ke ujung disk lalu memperbesar C:, tanpa boot ke WinPE.</span><span lang="en">On many laptops the Recovery partition sits right after C:, so Disk Management cannot extend C: even when there is free space behind it. Sekat moves the Recovery partition to the end of the disk and then extends C:, without booting into WinPE.</span></p>
+        <ol class="spot-steps">
+          <li><span lang="id"><code>reagentc /info</code> memastikan WinRE aktif di partisi itu, lalu isinya diperiksa. Bila ada berkas lain, misalnya image pemulihan pabrik, Sekat berhenti sebelum mengubah apa pun.</span><span lang="en"><code>reagentc /info</code> confirms WinRE is active on that partition, then its contents are checked. If there is anything else, such as a factory recovery image, Sekat stops before changing anything.</span></li>
+          <li><span lang="id">WinRE dimatikan sebentar, dan <code>winre.wim</code> disimpan di C:.</span><span lang="en">WinRE is turned off for a moment, and <code>winre.wim</code> is kept on C:.</span></li>
+          <li><span lang="id">Partisi Recovery dibuat ulang di ujung disk dengan tipe dan atribut yang sama.</span><span lang="en">The Recovery partition is recreated at the end of the disk with the same type and attributes.</span></li>
+          <li><span lang="id">WinRE dinyalakan lagi di partisi baru, lalu C: diperbesar.</span><span lang="en">WinRE is turned back on in the new partition, then C: is extended.</span></li>
+        </ol>
+      </div>
+      <div class="spot-visual" aria-hidden="true">
+        <p class="bar-label"><span lang="id">Sebelum</span><span lang="en">Before</span></p>
+        <div class="diskbar">
+          <span class="seg s-efi" style="flex:.7">EFI</span>
+          <span class="seg s-msr" style="flex:.35"></span>
+          <span class="seg s-sys" style="flex:5">C:</span>
+          <span class="seg s-rec" style="flex:1.3">Rec.</span>
+          <span class="seg s-free" style="flex:3.2"><span lang="id">kosong</span><span lang="en">free</span></span>
+        </div>
+        <p class="bar-label"><span lang="id">Sesudah</span><span lang="en">After</span></p>
+        <div class="diskbar">
+          <span class="seg s-efi" style="flex:.7">EFI</span>
+          <span class="seg s-msr" style="flex:.35"></span>
+          <span class="seg s-sys s-plan" style="flex:8.2">C:</span>
+          <span class="seg s-rec s-plan" style="flex:1.3">Rec.</span>
+        </div>
+        <pre class="code small"><code><span class="c"># <span lang="id">antrian.txt</span><span lang="en">queue.txt</span></span>
+move 0 4 right
+resize 0 3 max</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <h2><span lang="id">Lihat lebih dekat</span><span lang="en">Take a closer look</span></h2>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-tab="move"><span lang="id">Pindahkan</span><span lang="en">Move</span></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="resize"><span lang="id">Ubah ukuran</span><span lang="en">Resize</span></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="apply"><span lang="id">Terapkan antrian</span><span lang="en">Apply queue</span></button>
+        <button type="button" role="tab" aria-selected="false" data-tab="menu"><span lang="id">Menu disk</span><span lang="en">Disk menu</span></button>
+      </div>
+      <figure class="window" data-panel="move">
+        <div class="shot">
+          <img lang="id" class="t-light" src="img/shots/id-light-move.png" width="1196" height="819" loading="lazy" alt="Dialog Pindahkan: rentang letak yang bisa dipilih, tombol Paling kiri dan Paling kanan">
+          <img lang="id" class="t-dark" src="img/shots/id-dark-move.png" width="1196" height="819" loading="lazy" alt="Dialog Pindahkan: rentang letak yang bisa dipilih, tombol Paling kiri dan Paling kanan">
+          <img lang="en" class="t-light" src="img/shots/en-light-move.png" width="1196" height="819" loading="lazy" alt="The Move dialog: the allowed range of positions, with Leftmost and Rightmost buttons">
+          <img lang="en" class="t-dark" src="img/shots/en-dark-move.png" width="1196" height="819" loading="lazy" alt="The Move dialog: the allowed range of positions, with Leftmost and Rightmost buttons">
+        </div>
+        <figcaption><span lang="id">Letak baru dipilih di dalam ruang kosong di sebelahnya. Ukuran partisi tetap.</span><span lang="en">The new position is picked within the free space next to it. The size stays the same.</span></figcaption>
+      </figure>
+      <figure class="window" data-panel="resize" hidden>
+        <div class="shot">
+          <img lang="id" class="t-light" src="img/shots/id-light-resize.png" width="1196" height="819" loading="lazy" alt="Dialog Ubah ukuran dengan batas minimum dan maksimum dari Windows">
+          <img lang="id" class="t-dark" src="img/shots/id-dark-resize.png" width="1196" height="819" loading="lazy" alt="Dialog Ubah ukuran dengan batas minimum dan maksimum dari Windows">
+          <img lang="en" class="t-light" src="img/shots/en-light-resize.png" width="1196" height="819" loading="lazy" alt="The Resize dialog with the minimum and maximum limits reported by Windows">
+          <img lang="en" class="t-dark" src="img/shots/en-dark-resize.png" width="1196" height="819" loading="lazy" alt="The Resize dialog with the minimum and maximum limits reported by Windows">
+        </div>
+        <figcaption><span lang="id">Batas ukuran ditanyakan ke Windows, jadi isian di luar batas langsung ditolak.</span><span lang="en">Size limits come from Windows, so out-of-range input is rejected right away.</span></figcaption>
+      </figure>
+      <figure class="window" data-panel="apply" hidden>
+        <div class="shot">
+          <img lang="id" class="t-light" src="img/shots/id-light-apply.png" width="1196" height="819" loading="lazy" alt="Konfirmasi Terapkan antrian berisi daftar langkah dan peringatannya">
+          <img lang="id" class="t-dark" src="img/shots/id-dark-apply.png" width="1196" height="819" loading="lazy" alt="Konfirmasi Terapkan antrian berisi daftar langkah dan peringatannya">
+          <img lang="en" class="t-light" src="img/shots/en-light-apply.png" width="1196" height="819" loading="lazy" alt="The Apply queue confirmation listing every step and its warnings">
+          <img lang="en" class="t-dark" src="img/shots/en-dark-apply.png" width="1196" height="819" loading="lazy" alt="The Apply queue confirmation listing every step and its warnings">
+        </div>
+        <figcaption><span lang="id">Semua langkah dan peringatannya ditampilkan sekali lagi sebelum disk diubah.</span><span lang="en">Every step and its warnings are shown once more before the disk is changed.</span></figcaption>
+      </figure>
+      <figure class="window" data-panel="menu" hidden>
+        <div class="shot">
+          <img lang="id" class="t-light" src="img/shots/id-light-menu.png" width="1196" height="819" loading="lazy" alt="Menu disk: ubah ke MBR, cadangkan dan pulihkan tabel partisi, clone disk, simpan sebagai VHDX">
+          <img lang="id" class="t-dark" src="img/shots/id-dark-menu.png" width="1196" height="819" loading="lazy" alt="Menu disk: ubah ke MBR, cadangkan dan pulihkan tabel partisi, clone disk, simpan sebagai VHDX">
+          <img lang="en" class="t-light" src="img/shots/en-light-menu.png" width="1196" height="819" loading="lazy" alt="The disk menu: convert to MBR, back up and restore the partition table, clone the disk, save as VHDX">
+          <img lang="en" class="t-dark" src="img/shots/en-dark-menu.png" width="1196" height="819" loading="lazy" alt="The disk menu: convert to MBR, back up and restore the partition table, clone the disk, save as VHDX">
+        </div>
+        <figcaption><span lang="id">Operasi untuk seluruh disk ada di menu ⋯ setiap kartu disk.</span><span lang="en">Whole-disk operations live in the ⋯ menu on each disk card.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="keamanan" class="safety">
+    <div class="wrap">
+      <h2><span lang="id">Dibuat supaya sulit salah</span><span lang="en">Built to be hard to get wrong</span></h2>
+      <div class="grid grid-2">
+        <div class="point">
+          <h3><span lang="id">Disk fisik dikunci</span><span lang="en">Physical disks are locked</span></h3>
+          <p><span lang="id">Secara bawaan hanya disk virtual (VHD/VHDX) yang bisa diubah. Kunci disk fisik dibuka dengan sengaja dari header.</span><span lang="en">By default only virtual disks (VHD/VHDX) can be changed. You unlock physical disks on purpose from the header.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Windows dilindungi</span><span lang="en">Windows is protected</span></h3>
+          <p><span lang="id">Volume tempat Windows berjalan tidak bisa dihapus, diformat, atau diganti hurufnya. Partisi EFI dan MSR tidak pernah disentuh.</span><span lang="en">The volume Windows runs from cannot be deleted, formatted, or given another letter. The EFI and MSR partitions are never touched.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Memakai API Windows sendiri</span><span lang="en">Uses Windows' own API</span></h3>
+          <p><span lang="id">Operasi standar lewat Storage Management API, sama dengan Disk Management. Hanya pindah, salin, clone, dan pemulihan tabel yang menulis sektor sendiri, dan hanya ke disk yang sedang dilepas (offline).</span><span lang="en">Standard operations go through the Storage Management API, the same one Disk Management uses. Only move, copy, clone, and table restore write sectors themselves, and only to a disk that is offline.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Diperiksa tiga kali</span><span lang="en">Checked three times</span></h3>
+          <p><span lang="id">Isian divalidasi sebelum konfirmasi, divalidasi lagi setelah pindai ulang, lalu dicocokkan dengan data segar dari Windows tepat sebelum dijalankan.</span><span lang="en">Input is validated before confirmation, again after a rescan, and once more against fresh data from Windows right before it runs.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Membaca tanpa hak admin</span><span lang="en">Reads without admin rights</span></h3>
+          <p><span lang="id">Tanpa hak Administrator, Sekat hanya membaca. Disk dibuka tanpa akses tulis.</span><span lang="en">Without administrator rights Sekat only reads. Disks are opened without write access.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Diuji di disk virtual</span><span lang="en">Tested on virtual disks</span></h3>
+          <p><span lang="id">Setiap operasi tulis diuji otomatis di VHDX dalam 25 skenario, termasuk memastikan isi berkas tetap utuh.</span><span lang="en">Every write operation is tested automatically on VHDX in 25 scenarios, including checks that file contents stay intact.</span></p>
+        </div>
+      </div>
+      <p class="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 2.5 20h19L12 3.5Z"/><path d="M12 10v4.5M12 17.2v.3"/></svg>
+        <span lang="id">Mengubah partisi selalu punya risiko. Cadangkan data penting sebelum memindah, mengonversi, atau meng-clone disk.</span>
+        <span lang="en">Changing partitions always carries some risk. Back up important data before moving, converting, or cloning a disk.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="cli" class="cli">
+    <div class="wrap cli-inner">
+      <div>
+        <h2><span lang="id">Juga dari terminal</span><span lang="en">From the terminal, too</span></h2>
+        <p><span lang="id">Semua yang ada di GUI juga ada di perintah <code>sekat</code>. Tulis beberapa operasi di satu file, lalu periksa dengan <code>--dry-run</code>: rencana dan peta hasilnya tampil tanpa hak Administrator. <code>--json</code> memberi data lengkap untuk skrip.</span><span lang="en">Everything in the GUI is also in the <code>sekat</code> command. Write several operations into one file and check it with <code>--dry-run</code>: the plan and the resulting map are shown without administrator rights. <code>--json</code> gives complete data for scripts.</span></p>
+      </div>
+      <pre class="code"><code><span class="p">&gt;</span> sekat list
+<span class="p">&gt;</span> sekat move 1 3 left
+<span class="p">&gt;</span> sekat resize 1 3 max
+
+<span class="c"># <span lang="id">rencana.txt</span><span lang="en">plan.txt</span></span>
+init 2 --style gpt
+create 2 --size 1G --fs ntfs --label DATA
+create 2 --fs exfat --label ARSIP
+
+<span class="p">&gt;</span> sekat apply <span lang="id">rencana.txt</span><span lang="en">plan.txt</span> --dry-run
+<span class="p">&gt;</span> sekat apply <span lang="id">rencana.txt</span><span lang="en">plan.txt</span></code></pre>
+    </div>
+  </section>
+
+  <section id="unduh" class="download">
+    <div class="wrap">
+      <div class="dl-card">
+        <img src="img/logo.svg" width="72" height="72" alt="">
+        <div class="dl-body">
+          <h2>Sekat 1.1.0</h2>
+          <p class="muted"><span lang="id">6 November 2026 · Windows 10/11 64-bit · Indonesia dan Inggris</span><span lang="en">6 November 2026 · Windows 10/11 64-bit · Indonesian and English</span></p>
+          <div class="cta">
+            <a class="btn" href="https://github.com/romyrudiansah/sekat-web/releases/download/v1.1.0/Sekat-Setup-1.1.0.exe">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 19.5h15"/></svg>
+              Sekat-Setup-1.1.0.exe
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/romyrudiansah/sekat-web/releases"><span lang="id">Semua rilis</span><span lang="en">All releases</span></a>
+          </div>
+          <div class="hash">
+            <span class="hash-label">SHA-256</span>
+            <code id="sha">4016e0b3bce0373bd3ebd7b8e79bcccfb621e55d6375fc700eecdf742a873327</code>
+            <button type="button" class="tool" data-copy="sha"><span lang="id">Salin</span><span lang="en">Copy</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2 dl-notes">
+        <div class="point">
+          <h3><span lang="id">Isi installer</span><span lang="en">What the installer does</span></h3>
+          <p><span lang="id">Memasang Sekat ke Program Files, membuat shortcut Start Menu, dan bisa menambahkan perintah <code>sekat</code> ke PATH. Tidak butuh VC++ Redistributable. Uninstall mengembalikan PATH seperti semula.</span><span lang="en">Installs Sekat into Program Files, adds a Start Menu shortcut, and can add the <code>sekat</code> command to PATH. No VC++ Redistributable needed. Uninstalling restores PATH exactly.</span></p>
+        </div>
+        <div class="point">
+          <h3><span lang="id">Peringatan SmartScreen</span><span lang="en">SmartScreen warning</span></h3>
+          <p><span lang="id">Installer belum ditandatangani secara digital, jadi Windows bisa menampilkan "Windows protected your PC". Pilih <b>More info</b> lalu <b>Run anyway</b>. Cocokkan SHA-256 di atas bila ingin memastikan berkasnya utuh.</span><span lang="en">The installer is not digitally signed yet, so Windows may show "Windows protected your PC". Choose <b>More info</b>, then <b>Run anyway</b>. Compare the SHA-256 above if you want to be sure the file is intact.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tanya" class="faq">
+    <div class="wrap narrow">
+      <h2><span lang="id">Tanya jawab</span><span lang="en">Questions</span></h2>
+      <details>
+        <summary><span lang="id">Apakah Sekat gratis?</span><span lang="en">Is Sekat free?</span></summary>
+        <p><span lang="id">Ya. Sekat gratis dipakai untuk keperluan apa pun, dengan lisensi MIT atau Apache-2.0.</span><span lang="en">Yes. Sekat is free to use for any purpose, under the MIT or Apache-2.0 license.</span></p>
+      </details>
+      <details>
+        <summary><span lang="id">Kenapa disk saya tidak bisa diubah?</span><span lang="en">Why can't I change my disk?</span></summary>
+        <p><span lang="id">Ada dua kunci. Pertama, klik <b>Jalankan sebagai Administrator</b> di header. Kedua, disk fisik dikunci secara bawaan: klik <b>Disk fisik terkunci</b> di header untuk membukanya. Di CLI, tambahkan <code>--allow-physical</code>.</span><span lang="en">There are two locks. First, click <b>Run as Administrator</b> in the header. Second, physical disks are locked by default: click <b>Physical disks locked</b> in the header to unlock them. In the CLI, add <code>--allow-physical</code>.</span></p>
+      </details>
+      <details>
+        <summary><span lang="id">Bisakah saya mencoba tanpa risiko?</span><span lang="en">Can I try it without any risk?</span></summary>
+        <p><span lang="id">Bisa. Menu <b>Disk virtual → Buat dan pasang VHDX uji</b> membuat disk virtual untuk latihan. Semua operasi bisa dicoba di sana tanpa menyentuh disk asli.</span><span lang="en">Yes. <b>Virtual disk → Create and attach a test VHDX</b> creates a virtual disk to practice on. You can try every operation there without touching a real disk.</span></p>
+      </details>
+      <details>
+        <summary><span lang="id">Bagaimana bila listrik padam saat memindah partisi?</span><span lang="en">What if the power goes out while moving a partition?</span></summary>
+        <p><span lang="id">Buka Sekat lagi. Sebuah banner menawarkan <b>Lanjutkan pemindahan</b>, yang meneruskan dari potongan terakhir yang tercatat. Di CLI: <code>sekat resume</code>.</span><span lang="en">Open Sekat again. A banner offers <b>Resume move</b>, which continues from the last recorded chunk. In the CLI: <code>sekat resume</code>.</span></p>
+      </details>
+      <details>
+        <summary><span lang="id">Apa yang belum bisa dilakukan Sekat?</span><span lang="en">What can't Sekat do yet?</span></summary>
+        <ul>
+          <li><span lang="id">Memindah partisi logical di disk MBR.</span><span lang="en">Move logical partitions on MBR disks.</span></li>
+          <li><span lang="id">Memindah partisi data di disk tempat Windows berjalan, misalnya D:. Hanya partisi Recovery yang bisa dipindah di disk itu.</span><span lang="en">Move data partitions on the disk Windows runs from, such as D:. Only the Recovery partition can be moved on that disk.</span></li>
+          <li><span lang="id">Clone atau image disk tempat Windows berjalan. Itu butuh mode WinPE, yang belum ada.</span><span lang="en">Clone or image the disk Windows runs from. That needs a WinPE mode, which does not exist yet.</span></li>
+          <li><span lang="id">Mengubah ukuran volume selain NTFS dan ReFS. Ini batasan Windows sendiri.</span><span lang="en">Resize volumes other than NTFS and ReFS. This is a limit of Windows itself.</span></li>
+          <li><span lang="id">Konversi ke MBR untuk disk dengan lebih dari 4 partisi.</span><span lang="en">Convert a disk with more than 4 partitions to MBR.</span></li>
+        </ul>
+      </details>
+      <details>
+        <summary><span lang="id">Apakah Sekat mengirim data ke internet?</span><span lang="en">Does Sekat send data anywhere?</span></summary>
+        <p><span lang="id">Tidak. Sekat tidak terhubung ke internet sama sekali. Cadangan tabel partisi disimpan di <code>%LOCALAPPDATA%\Sekat\backups</code>.</span><span lang="en">No. Sekat does not connect to the internet at all. Partition table backups are stored in <code>%LOCALAPPDATA%\Sekat\backups</code>.</span></p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="brand">
+      <img src="img/logo.svg" width="24" height="24" alt="">
+      <span>Sekat</span>
+    </div>
+    <p class="muted">
+      <span lang="id">© 2026 Romy Rudiansah · Lisensi MIT atau Apache-2.0 · Disediakan apa adanya, tanpa jaminan.</span>
+      <span lang="en">© 2026 Romy Rudiansah · MIT or Apache-2.0 license · Provided as is, without warranty.</span>
+    </p>
+    <a href="https://github.com/romyrudiansah/sekat-web/releases"><span lang="id">Rilis di GitHub</span><span lang="en">Releases on GitHub</span></a>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Sekat: piringan disk yang dibagi tiga oleh celah (sekat).
+       Putih = data, putih transparan = ruang kosong, kuning = rencana di antrian. -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#115E59"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+    <mask id="gaps" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+      <rect width="256" height="256" fill="#fff"/>
+      <g stroke="#000" stroke-width="12" stroke-linecap="butt">
+        <line x1="128" y1="128" x2="128" y2="26"/>
+        <line x1="128" y1="128" x2="93.2" y2="223.8"/>
+        <line x1="128" y1="128" x2="39.7" y2="77"/>
+      </g>
+      <circle cx="128" cy="128" r="24" fill="#000"/>
+    </mask>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="url(#tile)"/>
+  <g mask="url(#gaps)">
+    <!-- 0° sampai 200°, searah jarum jam dari atas -->
+    <path d="M128 128 L128 42 A86 86 0 1 1 98.59 208.81 Z" fill="#FFFFFF"/>
+    <!-- 200° sampai 300° -->
+    <path d="M128 128 L98.59 208.81 A86 86 0 0 1 53.52 85 Z" fill="#FFFFFF" fill-opacity="0.45"/>
+    <!-- 300° sampai 360° -->
+    <path d="M128 128 L53.52 85 A86 86 0 0 1 128 42 Z" fill="#FDE047"/>
+  </g>
+  <circle cx="128" cy="128" r="9" fill="#FFFFFF"/>
+</svg>
